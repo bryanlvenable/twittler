@@ -5,21 +5,45 @@
     <script src="data_generator.js"></script>
     <style>
     div {
+
+    }
+
+    h1 {
+      color: #55ACEE;
+      font-family: Helvetica;
       text-align: center;
     }
+
+    .twitBox {
+      border-radius: .5em;
+      height:20em;
+      width:30em;
+      margin: auto;
+      background-color: #f5f8fa;
+      border: .25em solid #ccd6dd;
+      word-wrap: break-word;
+      overflow: scroll;
+    }
+
+    .button {
+      text-align: center;
+      vertical-align: center;
+      margin: auto;
+    }
+
     </style>
     <title>Twittler</title>
   </head>
   <body>
-    <div>
-      <h1>Twittler</h1>
-      <ul class='twitBox'></ul>
+    <h1>Twittler</h1>
+    <div class='twitBox'></div>
+    <div class='button'>
       <button>Refresh</button>
     </div>
+    
     <script>
     $(document).ready(function(){ 
-        // Implement refresh button
-        $('button').on('click', function() {
+      var getTwit = function() {
           var $body = $('.twitBox');
           $body.html('');
           var index = streams.home.length - 1;
@@ -30,8 +54,14 @@
             $tweet.appendTo($body);
             index -= 1;
           }
-        });
+      }
+      // Initial Twits
+      getTwit();
+      // Implement refresh button
+      $('button').on('click', function() {
+        getTwit();
       });
+    });
     </script>
   </body>
 </html>
