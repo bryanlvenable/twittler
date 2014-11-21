@@ -3,12 +3,22 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <style>
+    div {
+      text-align: center;
+    }
+    </style>
+    <title>Twittler</title>
   </head>
   <body>
+    <div>
+      <h1>Twittler</h1>
+      <ul class='twitBox'></ul>
+      <button>Refresh</button>
+    </div>
     <script>
-
-      $(document).ready(function(){
-        var $body = $('body');
+      $(document).ready(function(){ 
+        var $body = $('.twitBox');
         $body.html('');
 
         var index = streams.home.length - 1;
@@ -19,9 +29,7 @@
           $tweet.appendTo($body);
           index -= 1;
         }
-
       });
-
     </script>
   </body>
 </html>
