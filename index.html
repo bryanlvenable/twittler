@@ -22,7 +22,7 @@
       overflow: scroll;
     }
 
-    .subTwitBox {
+    #subTwitBox {
     }
 
     .twitMesage {
@@ -35,6 +35,7 @@
     }
     .userName {
       color: #55ACEE;
+      cursor: pointer;
     }
 
     </style>
@@ -63,9 +64,9 @@
             var s = date.getSeconds();
             var readableDate = ' ' + h + ':' + m + ':' + s;
 
-            var $tweet = $('<div class="subTwitBox">' +
-              '<a class="userName">' + tweet.user + '</a>' +
-              '<b class="timeStamp">' + ' Sent: ' + readableDate + '</b>' +
+            var $tweet = $('<div id="subTwitBox">' +
+              '<a class="userName">@' + tweet.user + '</a>' +
+              '<a class="timeStamp">' + ' Sent: ' + readableDate + '</a>' +
               '<div class="twitMessage">' + tweet.message + '</div>' +
               '</div>');
             //$tweet.text('@' + tweet.user + ': ' + tweet.message + readableDate);
@@ -83,7 +84,10 @@
       $('button').on('click', function() {
         getTwit();
       });
-      $('userName').on('click', function() {
+      $(document).on('click', '#subTwitBox', function() {
+        var clickedName = $(this).closest('div').attr('class');
+        $("." + clickedName).show();
+        $("a").not("." + clickedName).hide();
       });
     });
     </script>
