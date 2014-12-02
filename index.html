@@ -4,10 +4,6 @@
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <style>
-    div {
-
-    }
-
     h1 {
       color: #55ACEE;
       font-family: Helvetica;
@@ -15,8 +11,9 @@
     }
 
     .twitBox {
+      color: #292f33;
       border-radius: .5em;
-      height:20em;
+      height:40em;
       width:30em;
       margin: auto;
       background-color: #f5f8fa;
@@ -25,10 +22,19 @@
       overflow: scroll;
     }
 
+    .subTwitBox {
+    }
+
+    .twitMesage {
+    }
+
     .button {
       text-align: center;
       vertical-align: center;
       margin: auto;
+    }
+    .userName {
+      color: #55ACEE;
     }
 
     </style>
@@ -47,19 +53,37 @@
           var $body = $('.twitBox');
           $body.html('');
           var index = streams.home.length - 1;
-          while(index >= 0){
+          var i = 0;
+          while(index >= 0){;
             var tweet = streams.home[index];
-            var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            var time = $.now();
+            var date = new Date(time);
+            var h = date.getHours();
+            var m = date.getMinutes();
+            var s = date.getSeconds();
+            var readableDate = ' ' + h + ':' + m + ':' + s;
+
+            var $tweet = $('<div class="subTwitBox">' +
+              '<a class="userName">' + tweet.user + '</a>' +
+              '<b class="timeStamp">' + ' Sent: ' + readableDate + '</b>' +
+              '<div class="twitMessage">' + tweet.message + '</div>' +
+              '</div>');
+            //$tweet.text('@' + tweet.user + ': ' + tweet.message + readableDate);
             $tweet.appendTo($body);
+            i++;
             index -= 1;
           }
-      }
+      };
+      // Create function that will allow users to click on a name
+      var userTwit = function (userName) {
+      };
       // Initial Twits
       getTwit();
       // Implement refresh button
       $('button').on('click', function() {
         getTwit();
+      });
+      $('userName').on('click', function() {
       });
     });
     </script>
